@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TripFinder - Results</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="results">
+    <h1>Your Perfect Destination</h1>
+    <div id="result-display"></div>
+    <p id="weather">Fetching weather...</p>
+    <a href="quiz.html" class="btn">Restart Quiz</a>
+  </main>
+  <script>
+    const answers = JSON.parse(localStorage.getItem('quizAnswers')) || [];
+    const resultDisplay = document.getElementById('result-display');
+    const weatherInfo = document.getElementById('weather');
+    
+    const scores = { Paris: 0, Tokyo: 0, NewYork: 0 };
+    answers.forEach(ans => {
+      if (ans === 'beach') scores.Paris++;
+      if (ans === 'mountains') scores.Tokyo++;
+      if (ans === 'city') scores.NewYork++;
+      if (ans === 'warm') scores.Paris++;
+      if (ans === 'cold') scores.Tokyo++;
+      if (ans === 'mild') scores.NewYork++;
+    });
+
+    const best = Object.entries(scores).sort((a, b) => b[1] - a[1])[0][0];
+    const descriptions = {
+      Paris: `<h2>Paris</h2><img src="assets/paris.jpg" class="result-img"><p>A relaxing and cultural getaway with world-class cuisine.</p>`,
+      Tokyo: `<h2>Tokyo</h2><img src="assets/tokyo.jpg" class="result-img"><p>A futuristic city full of tech, nature, and great food.</p>`,
+      NewYork: `<h2>New York</h2><img src="assets/newyork.jpg" class="result-img"><p>Perfect for lovers of adventure, city life, and famous sights.</p>`
+    };
+    resultDisplay.innerHTML = descriptions[best];
+
+    // Optional: fetch OpenWeather data
+    const apiKey = 'YOUR_OPENWEATHER_API_KEY';
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${best}&appid=${apiKey}&units=metric`)
+      .then(res => res.json())
+      .then(data => {
+        weatherInfo.textContent = `Current weather in ${best}: ${data.main.temp}°C, ${data.weather[0].description}`;
+      })
+      .catch(() => weatherInfo.textContent = 'Weather unavailable.');
+  </script>
+</body>
+</html>
