@@ -81,6 +81,66 @@ body {
   background-color: #40916c;
 }
 
+/* Homepage Sections */
+.featured, .about, .contact {
+  text-align: center;
+  padding: 3rem 2rem;
+}
+
+.card-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.card {
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  transition: transform 0.3s;
+  width: 280px;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.card h3 {
+  margin: 1rem 0 0.5rem;
+  color: #2d6a4f;
+}
+
+.card p {
+  padding: 0 1rem 1rem;
+  font-size: 0.95rem;
+}
+
+/* Toggle Content */
+.toggle-content {
+  display: none;
+  max-width: 700px;
+  margin: 1rem auto;
+  font-size: 1rem;
+}
+
+.toggle-content.visible {
+  display: block;
+}
+
+.toggle-icon {
+  color: #2d6a4f;
+  font-size: 1.2rem;
+  margin-left: 0.5rem;
+}
+
 /* Quiz & Results Layout */
 .quiz-container, .results {
   background-color: white;
@@ -105,29 +165,28 @@ body {
   flex-direction: column;
   gap: 1rem;
   margin: 2rem 0;
+  align-items: center;
 }
 
 .option {
   background-color: #e0f8eb;
   border: 2px solid transparent;
   border-radius: 10px;
-  padding: 1rem;
+  padding: 1rem 1.5rem;
   cursor: pointer;
   transition: all 0.3s;
   font-weight: 500;
+  width: fit-content;
 }
 
-.option:hover, .option input:checked + label {
-  background-color: #d2f4e0;
-  border-color: #2d6a4f;
+.option:hover {
+  background-color: #c6f1d6;
 }
 
-.option input {
-  display: none;
-}
-
-.option label {
-  cursor: pointer;
+.option.selected {
+  background-color: #a6e9c7;
+  border: 2px solid #2d6a4f;
+  color: #1b4332;
 }
 
 /* Slideshow */
@@ -137,25 +196,16 @@ body {
 
 .result-img {
   width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
   border-radius: 10px;
 }
 
-/* Toggle Content */
-.toggle-content {
-  display: none;
-  max-width: 700px;
-  margin: 1rem auto;
-  font-size: 1rem;
-}
-
-.toggle-content.visible {
-  display: block;
-}
-
-.toggle-icon {
-  color: #2d6a4f;
-  font-size: 1.2rem;
-  margin-left: 0.5rem;
+/* Results Page Content */
+.weather-box, .description-box {
+  font-size: 1.1rem;
+  color: #333;
+  margin-top: 1rem;
 }
 
 /* Footer */
@@ -165,4 +215,21 @@ footer {
   padding: 1rem;
   font-size: 0.9rem;
   color: #333;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navbar nav ul {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+  }
 }

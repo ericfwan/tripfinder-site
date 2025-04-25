@@ -3,54 +3,87 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TripFinder - Results</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <title>TripFinder - Your Result</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header>
-    <img src="assets/logo.png" alt="TripFinder Logo" class="site-logo">
+  <header class="navbar">
+    <a href="index.html"><img src="assets/img/logo.png" alt="TripFinder Logo" class="site-logo" /></a>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="quiz.html">Quiz</a></li>
+        <li><a href="results.html" class="active">Results</a></li>
+      </ul>
+    </nav>
   </header>
 
-<body>
   <main class="results">
-    <h1>Your Perfect Destination</h1>
-    <div id="result-display"></div>
-    <p id="weather">Fetching weather...</p>
-    <a href="quiz.html" class="btn">Restart Quiz</a>
+    <h2>Your Perfect Destination</h2>
+    <div class="slideshow">
+      <img id="slideshow-image" class="result-img" src="" alt="Destination Slideshow" />
+    </div>
+    <div id="description" class="description-box"></div>
+    <p id="weather" class="weather-box">Fetching weather...</p>
+
+    <a href="quiz.html" class="btn restart">Restart Quiz</a>
   </main>
+
   <script>
-    const answers = JSON.parse(localStorage.getItem('quizAnswers')) || [];
-    const resultDisplay = document.getElementById('result-display');
-    const weatherInfo = document.getElementById('weather');
-    
+    const answers = JSON.parse(localStorage.getItem("quizAnswers")) || [];
     const scores = { Paris: 0, Tokyo: 0, NewYork: 0 };
     answers.forEach(ans => {
-      if (ans === 'beach') scores.Paris++;
-      if (ans === 'mountains') scores.Tokyo++;
-      if (ans === 'city') scores.NewYork++;
-      if (ans === 'warm') scores.Paris++;
-      if (ans === 'cold') scores.Tokyo++;
-      if (ans === 'mild') scores.NewYork++;
+      if (ans === 'Beach' || ans === 'Warm' || ans === 'Relaxation') scores.Paris++;
+      if (ans === 'Mountains' || ans === 'Cold' || ans === 'Adventure') scores.Tokyo++;
+      if (ans === 'City' || ans === 'Mild' || ans === 'Culture') scores.NewYork++;
     });
 
     const best = Object.entries(scores).sort((a, b) => b[1] - a[1])[0][0];
-    const descriptions = {
-      Paris: `<h2>Paris</h2><img src="assets/paris.jpg" class="result-img"><p>A relaxing and cultural getaway with world-class cuisine.</p>`,
-      Tokyo: `<h2>Tokyo</h2><img src="assets/tokyo.jpg" class="result-img"><p>A futuristic city full of tech, nature, and great food.</p>`,
-      NewYork: `<h2>New York</h2><img src="assets/newyork.jpg" class="result-img"><p>Perfect for lovers of adventure, city life, and famous sights.</p>`
-    };
-    resultDisplay.innerHTML = descriptions[best];
+    const descriptionBox = document.getElementById("description");
+    const weatherBox = document.getElementById("weather");
+    const slideshowImage = document.getElementById("slideshow-image");
 
-    // Optional: fetch OpenWeather data
-    const apiKey = '639c21cf27828cef91bddc13448a93ac';
-    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${best}&appid=${apiKey}&units=metric`)
+    const descriptions = {
+      Paris: "Bonjour! You’re matched with Paris — the city of art, elegance, and dreamy pastries.",
+      Tokyo: "Konnichiwa! You’re heading to Tokyo — a vibrant fusion of tradition and tech.",
+      NewYork: "Hey there! You’re matched with New York — buzzing with life, food, and Broadway!"
+    };
+
+    const coords = {
+      Paris: { lat: 48.8566, lon: 2.3522 },
+      Tokyo: { lat: 35.6762, lon: 139.6503 },
+      NewYork: { lat: 40.7128, lon: -74.0060 }
+    };
+
+    const slides = {
+      Paris: ["assets/img/paris1.jpg", "assets/img/paris2.jpg", "assets/img/paris3.jpg"],
+      Tokyo: ["assets/img/tokyo1.jpg", "assets/img/tokyo2.jpg", "assets/img/tokyo3.jpg"],
+      NewYork: ["assets/img/newyork1.jpg", "assets/img/newyork2.jpg", "assets/img/newyork3.jpg"]
+    };
+
+    descriptionBox.textContent = descriptions[best];
+    let slideIndex = 0;
+    function showSlides() {
+      const images = slides[best];
+      slideshowImage.src = images[slideIndex];
+      slideIndex = (slideIndex + 1) % images.length;
+      setTimeout(showSlides, 2500);
+    }
+    showSlides();
+
+    const apiKey = "YOUR_API_KEY_HERE";
+    const { lat, lon } = coords[best];
+
+    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`)
       .then(res => res.json())
       .then(data => {
-        weatherInfo.textContent = `Current weather in ${best}: ${data.main.temp}°C, ${data.weather[0].description}`;
+        weatherBox.textContent = `Current weather in ${best}: ${data.main.temp}°C, ${data.weather[0].description}`;
       })
-      .catch(() => weatherInfo.textContent = 'Weather unavailable.');
+      .catch(() => {
+        weatherBox.textContent = "Weather data unavailable.";
+      });
   </script>
 </body>
 </html>

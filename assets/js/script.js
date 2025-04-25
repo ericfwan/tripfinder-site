@@ -22,42 +22,35 @@ const nextBtn = document.getElementById("nextBtn");
 const prevBtn = document.getElementById("prevBtn");
 const progressText = document.getElementById("progress");
 
-// Load a question
 function loadQuestion() {
   const q = questions[current];
   questionContainer.innerHTML = `
     <h2>${q.question}</h2>
     <div class="option-group">
       ${q.options.map(opt => `
-        <label class="option">
-          <input type="radio" name="answer" value="${opt}" ${answers[current] === opt ? 'checked' : ''}>
+        <div class="option ${answers[current] === opt ? 'selected' : ''}" data-value="${opt}">
           ${opt}
-        </label>
+        </div>
       `).join('')}
     </div>
   `;
 
-  // Update progress text
+  document.querySelectorAll(".option").forEach(option => {
+    option.addEventListener("click", () => {
+      answers[current] = option.dataset.value;
+      document.querySelectorAll(".option").forEach(o => o.classList.remove("selected"));
+      option.classList.add("selected");
+    });
+  });
+
   progressText.textContent = `Question ${current + 1} of ${questions.length}`;
-
-  // Update progress bar width
-  const percentage = ((current + 1) / questions.length) * 100;
-  progressBar.style.width = percentage + "%";
-
-  // Hide prev button on first question
+  progressBar.style.width = ((current + 1) / questions.length) * 100 + "%";
   prevBtn.style.display = current === 0 ? "none" : "inline-block";
-
-  // Change "Next" to "Submit" on last question
   nextBtn.textContent = current === questions.length - 1 ? "Submit" : "Next";
 }
 
-// Handle "Next"
 nextBtn.addEventListener("click", () => {
-  const selected = document.querySelector('input[name="answer"]:checked');
-  if (!selected) return alert("Please select an answer!");
-
-  answers[current] = selected.value;
-
+  if (!answers[current]) return alert("Please select an answer!");
   if (current < questions.length - 1) {
     current++;
     loadQuestion();
@@ -67,7 +60,6 @@ nextBtn.addEventListener("click", () => {
   }
 });
 
-// Handle "Previous"
 prevBtn.addEventListener("click", () => {
   if (current > 0) {
     current--;
@@ -75,5 +67,4 @@ prevBtn.addEventListener("click", () => {
   }
 });
 
-// Init
 loadQuestion();
