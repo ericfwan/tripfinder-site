@@ -1,15 +1,23 @@
 const questions = [
   {
-    question: "What type of setting do you prefer?",
-    options: ["Beach", "Mountains", "City"]
+    question: "What kind of city vibe are you drawn to?",
+    options: ["✨ Artistic and romantic", "🌃 Futuristic and fast-paced", "🏙️ Bold and bustling with energy"]
   },
   {
-    question: "What's your ideal climate?",
-    options: ["Warm", "Cold", "Mild"]
+    question: "What’s your ideal way to spend a free day?",
+    options: ["🖼️ Visiting museums and sipping coffee", "🎮 Exploring tech districts or arcades", "🛍️ Shopping and seeing a Broadway show"]
   },
   {
-    question: "What's your travel goal?",
-    options: ["Relaxation", "Adventure", "Culture"]
+    question: "Which food experience excites you the most?",
+    options: ["🥐 Fresh pastries and fine dining", "🍣 Sushi, ramen, and quirky treats", "🍕 Iconic street food and world cuisine"]
+  },
+  {
+    question: "What kind of fashion/style inspires you?",
+    options: ["🧥 Chic, timeless, designer", "🧢 Creative, tech-inspired, playful", "👟 Trendy, bold, statement-making"]
+  },
+  {
+    question: "What kind of adventure are you looking for?",
+    options: ["💘 A romantic getaway", "🎌 Culture shock and discovery", "🎤 Big-city thrill and nightlife"]
   }
 ];
 

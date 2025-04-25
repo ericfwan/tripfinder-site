@@ -27,28 +27,41 @@
     </div>
     <div id="description" class="description-box"></div>
     <p id="weather" class="weather-box">Fetching weather...</p>
-
     <a href="quiz.html" class="btn restart">Restart Quiz</a>
   </main>
 
   <script>
     const answers = JSON.parse(localStorage.getItem("quizAnswers")) || [];
-    const scores = { Paris: 0, Tokyo: 0, NewYork: 0 };
+
+    // Destination scores
+    const scores = {
+      Paris: 0,
+      Tokyo: 0,
+      NewYork: 0
+    };
+
     answers.forEach(ans => {
-      if (ans === 'Beach' || ans === 'Warm' || ans === 'Relaxation') scores.Paris++;
-      if (ans === 'Mountains' || ans === 'Cold' || ans === 'Adventure') scores.Tokyo++;
-      if (ans === 'City' || ans === 'Mild' || ans === 'Culture') scores.NewYork++;
+      if (ans.includes("Artistic") || ans.includes("museums") || ans.includes("pastries") || ans.includes("Chic") || ans.includes("romantic")) {
+        scores.Paris++;
+      }
+      if (ans.includes("Futuristic") || ans.includes("tech") || ans.includes("ramen") || ans.includes("Creative") || ans.includes("Culture shock")) {
+        scores.Tokyo++;
+      }
+      if (ans.includes("bustling") || ans.includes("Broadway") || ans.includes("street food") || ans.includes("Trendy") || ans.includes("nightlife")) {
+        scores.NewYork++;
+      }
     });
 
     const best = Object.entries(scores).sort((a, b) => b[1] - a[1])[0][0];
+
     const descriptionBox = document.getElementById("description");
     const weatherBox = document.getElementById("weather");
     const slideshowImage = document.getElementById("slideshow-image");
 
     const descriptions = {
-      Paris: "Bonjour! You’re matched with Paris — the city of art, elegance, and dreamy pastries.",
-      Tokyo: "Konnichiwa! You’re heading to Tokyo — a vibrant fusion of tradition and tech.",
-      NewYork: "Hey there! You’re matched with New York — buzzing with life, food, and Broadway!"
+      Paris: "Bonjour! You’re matched with Paris — the city of art, elegance, fashion, and dreamy pastries.",
+      Tokyo: "Konnichiwa! You’re heading to Tokyo — where tradition and technology collide in amazing ways.",
+      NewYork: "Hey! You’re matched with New York — a powerhouse of culture, fashion, and unforgettable energy."
     };
 
     const coords = {
@@ -64,6 +77,8 @@
     };
 
     descriptionBox.textContent = descriptions[best];
+
+    // Slideshow animation
     let slideIndex = 0;
     function showSlides() {
       const images = slides[best];
@@ -73,7 +88,8 @@
     }
     showSlides();
 
-    const apiKey = "639c21cf27828cef91bddc13448a93ac";
+    // Weather API call
+    const apiKey = "YOUR_API_KEY_HERE";
     const { lat, lon } = coords[best];
 
     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`)
