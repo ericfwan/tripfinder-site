@@ -1,37 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TripFinder - Home</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TripFinder - Discover Your Destination</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header>
-    <img src="assets/logo.png" alt="TripFinder Logo" class="site-logo">
+  <header class="navbar">
+    <img src="assets/img/logo.png" alt="TripFinder Logo" class="site-logo" />
+    <nav>
+      <ul>
+        <li><a href="quiz.html">Quiz</a></li>
+        <li><a href="#destinations">Destinations</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
   </header>
 
-  <main>
-    <section>
-      <h2>Find your perfect travel destination!</h2>
-      <p>Take a quick quiz and get matched with the best destination for your vibe.</p>
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Where Should You Travel Next?</h1>
+      <p>Take a quick quiz and let TripFinder guide you to your dream destination!</p>
       <a href="quiz.html" class="btn">Start Quiz</a>
-    </section>
+    </div>
+  </section>
 
-    <section>
-      <h2>Top Destinations</h2>
-      <ul>
-        <li>Paris</li>
-        <li>Tokyo</li>
-        <li>New York</li>
-      </ul>
-    </section>
+  <section class="featured" id="destinations">
+    <h2>Popular Picks</h2>
+    <div class="card-grid">
+      <div class="card">
+        <img src="assets/img/paris1.jpg" alt="Paris" />
+        <h3>Paris</h3>
+        <p>City of love, art, and pastries 🍷</p>
+      </div>
+      <div class="card">
+        <img src="assets/img/tokyo1.jpg" alt="Tokyo" />
+        <h3>Tokyo</h3>
+        <p>Where neon meets nature 🌸</p>
+      </div>
+      <div class="card">
+        <img src="assets/img/newyork1.jpg" alt="New York" />
+        <h3>New York</h3>
+        <p>The city that never sleeps 🗽</p>
+      </div>
+    </div>
+  </section>
 
-    <section>
-      <h2>About Us</h2>
-      <p>We help busy professionals, students, and first-time travelers explore amazing destinations through fun, personalized recommendations.</p>
-    </section>
-  </main>
+  <section class="about" id="about">
+    <h2>About TripFinder</h2>
+    <p>TripFinder is your go-to travel buddy! Whether you're a student, busy professional, or first-time explorer — our quiz helps you discover the perfect destination based on your vibe.</p>
+  </section>
+
+  <section class="contact" id="contact">
+    <h2>Contact Us</h2>
+    <p>📧 <a href="mailto:info@tripfinder.com">info@tripfinder.com</a></p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 TripFinder. Designed with 💙 for curious travelers.</p>
+  </footer>
 </body>
 </html>
+
