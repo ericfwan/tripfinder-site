@@ -1,4 +1,4 @@
-/* Reset & Base Styles */
+/* Base & Reset */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -6,7 +6,7 @@
 }
 
 body {
-  font-family: 'Arial', sans-serif;
+  font-family: 'Fredoka', sans-serif;
   background-color: #f3fdf6;
   color: #333;
   line-height: 1.6;
@@ -38,7 +38,7 @@ body {
 .navbar nav a {
   text-decoration: none;
   color: #2d6a4f;
-  font-weight: bold;
+  font-weight: 600;
   transition: color 0.3s;
 }
 
@@ -46,11 +46,11 @@ body {
   color: #40916c;
 }
 
-/* Hero Section */
+/* Hero */
 .hero {
   background: linear-gradient(to right, #d8f3dc, #b7e4c7);
   text-align: center;
-  padding: 4rem 2rem;
+  padding: 5rem 2rem;
 }
 
 .hero h1 {
@@ -66,89 +66,96 @@ body {
 }
 
 .btn {
-  display: inline-block;
   background-color: #2d6a4f;
   color: white;
   padding: 0.75rem 1.5rem;
-  border-radius: 5px;
+  border-radius: 8px;
   text-decoration: none;
-  font-weight: bold;
+  font-weight: 600;
   transition: background-color 0.3s;
+  display: inline-block;
+  margin: 0.5rem;
 }
 
 .btn:hover {
   background-color: #40916c;
 }
 
-/* Featured Destinations */
-.featured {
-  padding: 3rem 2rem;
-  text-align: center;
-}
-
-.featured h2 {
-  font-size: 2rem;
-  margin-bottom: 2rem;
-  color: #1b4332;
-}
-
-.card-grid {
-  display: grid;
-  gap: 2rem;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  padding: 0 1rem;
-}
-
-.card {
+/* Quiz & Results Layout */
+.quiz-container, .results {
   background-color: white;
+  margin: 3rem auto;
+  padding: 2rem;
+  max-width: 700px;
   border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-  transition: transform 0.3s;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-}
-
-.card img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-}
-
-.card h3 {
-  margin: 1rem 0 0.5rem;
-  color: #2d6a4f;
-}
-
-.card p {
-  padding: 0 1rem 1rem;
-  font-size: 0.95rem;
-}
-
-/* About & Contact */
-.about, .contact {
-  background-color: #ffffff;
-  padding: 3rem 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   text-align: center;
 }
 
-.about h2, .contact h2 {
+.quiz-container h1, .results h2 {
+  font-family: 'Fredoka', sans-serif;
   font-size: 2rem;
   margin-bottom: 1rem;
   color: #1b4332;
 }
 
-.about p, .contact p {
+/* Question Options */
+.option-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.option {
+  background-color: #e0f8eb;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  padding: 1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-weight: 500;
+}
+
+.option:hover, .option input:checked + label {
+  background-color: #d2f4e0;
+  border-color: #2d6a4f;
+}
+
+.option input {
+  display: none;
+}
+
+.option label {
+  cursor: pointer;
+}
+
+/* Slideshow */
+.slideshow {
+  margin: 2rem 0;
+}
+
+.result-img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+/* Toggle Content */
+.toggle-content {
+  display: none;
   max-width: 700px;
-  margin: 0 auto;
+  margin: 1rem auto;
   font-size: 1rem;
 }
 
-.contact a {
+.toggle-content.visible {
+  display: block;
+}
+
+.toggle-icon {
   color: #2d6a4f;
-  text-decoration: underline;
+  font-size: 1.2rem;
+  margin-left: 0.5rem;
 }
 
 /* Footer */
@@ -158,21 +165,4 @@ footer {
   padding: 1rem;
   font-size: 0.9rem;
   color: #333;
-}
-
-/* Responsive tweaks */
-@media (max-width: 600px) {
-  .hero h1 {
-    font-size: 2rem;
-  }
-
-  .navbar nav ul {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .navbar {
-    flex-direction: column;
-    align-items: flex-start;
-  }
 }
