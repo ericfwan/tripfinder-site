@@ -6,11 +6,11 @@
   <title>TripFinder - Discover Your Destination</title>
   <link rel="stylesheet" href="assets/css/style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
   <header class="navbar">
-    <img src="assets/img/logo.png" alt="TripFinder Logo" class="site-logo" />
+    <a href="index.html"><img src="assets/img/logo.png" alt="TripFinder Logo" class="site-logo" /></a>
     <nav>
       <ul>
         <li><a href="quiz.html">Quiz</a></li>
@@ -21,7 +21,7 @@
     </nav>
   </header>
 
-  <section class="hero">
+  <section class="hero fade-in">
     <div class="hero-text">
       <h1>Where Should You Travel Next?</h1>
       <p>Take a quick quiz and let TripFinder guide you to your dream destination!</p>
@@ -29,40 +29,38 @@
     </div>
   </section>
 
-  <section class="featured" id="destinations">
+  <section class="featured fade-in" id="destinations">
     <h2>Popular Picks</h2>
     <div class="card-grid">
-      <div class="card">
-        <img src="assets/img/paris1.jpg" alt="Paris" />
-        <h3>Paris</h3>
-        <p>City of love, art, and pastries 🍷</p>
-      </div>
-      <div class="card">
-        <img src="assets/img/tokyo1.jpg" alt="Tokyo" />
-        <h3>Tokyo</h3>
-        <p>Where neon meets nature 🌸</p>
-      </div>
-      <div class="card">
-        <img src="assets/img/newyork1.jpg" alt="New York" />
-        <h3>New York</h3>
-        <p>The city that never sleeps 🗽</p>
-      </div>
+      <div class="card"><img src="assets/img/paris1.jpg" alt="Paris" /><h3>Paris</h3><p>City of love, art, and pastries 🍷</p></div>
+      <div class="card"><img src="assets/img/tokyo1.jpg" alt="Tokyo" /><h3>Tokyo</h3><p>Where neon meets nature 🌸</p></div>
+      <div class="card"><img src="assets/img/newyork1.jpg" alt="New York" /><h3>New York</h3><p>The city that never sleeps 🗽</p></div>
     </div>
   </section>
 
-  <section class="about" id="about">
-    <h2>About TripFinder</h2>
-    <p>TripFinder is your go-to travel buddy! Whether you're a student, busy professional, or first-time explorer — our quiz helps you discover the perfect destination based on your vibe.</p>
+  <section class="expandable fade-in" id="about">
+    <h2 onclick="toggleSection('about-details')">📘 About TripFinder <i class="fas fa-chevron-down"></i></h2>
+    <div id="about-details" class="collapsible">
+      <p>TripFinder is a fun, personalized destination quiz for students, busy professionals, and new travelers. By answering a few simple questions, you’ll discover a destination tailored to your personality and travel goals.</p>
+    </div>
   </section>
 
-  <section class="contact" id="contact">
-    <h2>Contact Us</h2>
-    <p>📧 <a href="mailto:info@tripfinder.com">info@tripfinder.com</a></p>
+  <section class="expandable fade-in" id="contact">
+    <h2 onclick="toggleSection('contact-details')">📬 Contact Us <i class="fas fa-chevron-down"></i></h2>
+    <div id="contact-details" class="collapsible">
+      <p>Got feedback or a destination suggestion? We'd love to hear from you! Reach us anytime at <a href="mailto:info@tripfinder.com">info@tripfinder.com</a> or find us on Instagram @TripFinder</p>
+    </div>
   </section>
 
   <footer>
     <p>&copy; 2025 TripFinder. Designed with 💙 for curious travelers.</p>
   </footer>
+
+  <script>
+    function toggleSection(id) {
+      const section = document.getElementById(id);
+      section.classList.toggle('open');
+    }
+  </script>
 </body>
 </html>
-
