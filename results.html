@@ -44,7 +44,7 @@
     resultDisplay.innerHTML = descriptions[best];
 
     // Optional: fetch OpenWeather data
-    const apiKey = 'YOUR_OPENWEATHER_API_KEY';
+    const apiKey = '639c21cf27828cef91bddc13448a93ac';
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${best}&appid=${apiKey}&units=metric`)
       .then(res => res.json())
       .then(data => {
